@@ -1,0 +1,1307 @@
+**Definition → Why we use it → Real life example → System design example**
+
+---
+
+# 1. Functional Requirements
+
+### Definition
+
+Functional requirements describe **what the system should do**.
+
+They define the actual features and behavior expected from the system.
+
+### Why do we use them?
+
+Before designing a system, we need to know what functionality it must provide.
+
+### Real life example
+
+For a food delivery application:
+
+• User can search restaurants
+• User can order food
+• Restaurant can accept orders
+• Delivery partner can receive orders
+• User can make payment
+• User can track delivery
+
+These are functional requirements.
+
+### System design example
+
+For YouTube:
+
+• Upload video
+• Watch video
+• Search video
+• Like video
+• Comment
+• Subscribe to channel
+
+---
+
+# 2. Non Functional Requirements
+
+### Definition
+
+Non functional requirements describe **how well the system should work**.
+
+They are related to qualities such as speed, availability, scalability, security and reliability.
+
+### Why do we use them?
+
+Two systems can provide the same functionality but have completely different quality.
+
+For example:
+
+Application A takes 10 seconds to load.
+
+Application B takes 1 second.
+
+Both provide the same functionality, but B has better performance.
+
+### Real life example
+
+For a banking application:
+
+• Response should be fast
+• System should be available almost all the time
+• Transactions should be reliable
+• User data should be secure
+• System should handle millions of users
+
+---
+
+# 3. CDN
+
+**Content Delivery Network**
+
+### Definition
+
+A CDN is a network of servers distributed across different geographical locations that delivers content from a server closer to the user.
+
+### Why do we use it?
+
+To reduce:
+
+• Latency
+• Server load
+• Network distance
+• Loading time
+
+### Real life example
+
+Suppose you are in India and watch a video hosted on a server in the USA.
+
+Without CDN:
+
+User → USA Server → User
+
+With CDN:
+
+User → India CDN Server → User
+
+The content reaches you faster.
+
+### System design example
+
+For Netflix:
+
+Movies and images can be cached on CDN servers around the world.
+
+User in India gets content from a nearby CDN location.
+
+---
+
+# 4. Database
+
+### Definition
+
+A database stores and manages application data.
+
+### Why do we use it?
+
+Applications need to permanently store information.
+
+### Real life example
+
+Instagram needs to store:
+
+• Users
+• Posts
+• Comments
+• Likes
+• Followers
+
+A database stores this information.
+
+### Examples
+
+**SQL databases**
+
+MySQL
+PostgreSQL
+Oracle
+
+**NoSQL databases**
+
+MongoDB
+Cassandra
+DynamoDB
+
+### Simple example
+
+When you create an Instagram account:
+
+```text
+User ID: 101
+Name: Ram
+Email: ram@gmail.com
+```
+
+This information is stored in a database.
+
+---
+
+# 5. Architecture
+
+### Definition
+
+Architecture describes **how different components of a system are organized and communicate with each other**.
+
+### Why do we use it?
+
+Large systems contain many components.
+
+Architecture tells us how these components interact.
+
+### Real life example
+
+An online shopping system may have:
+
+```text
+User
+  ↓
+Frontend
+  ↓
+API Server
+  ↓
+Database
+```
+
+For a larger system:
+
+```text
+User
+ ↓
+Load Balancer
+ ↓
+Application Servers
+ ↓
+Cache
+ ↓
+Database
+```
+
+### Common architectures
+
+Monolithic architecture
+
+Microservices architecture
+
+Layered architecture
+
+Event driven architecture
+
+---
+
+# 6. API
+
+**Application Programming Interface**
+
+### Definition
+
+An API allows two software systems to communicate with each other.
+
+### Why do we use it?
+
+Frontend and backend need a communication mechanism.
+
+### Real life example
+
+When you open a weather application:
+
+```text
+Mobile App
+     ↓
+Weather API
+     ↓
+Weather Server
+     ↓
+Temperature Data
+```
+
+The application gets weather information through an API.
+
+### Example
+
+```text
+GET /users/101
+```
+
+Response:
+
+```json
+{
+  "id": 101,
+  "name": "Ram"
+}
+```
+
+---
+
+# 7. Messaging Queue
+
+### Definition
+
+A messaging queue temporarily stores messages between producers and consumers.
+
+### Why do we use it?
+
+It allows systems to process tasks **asynchronously**.
+
+It also prevents one slow service from blocking another service.
+
+### Real life example
+
+Imagine a restaurant.
+
+Customer gives order.
+
+The waiter does not personally cook the food.
+
+Instead:
+
+```text
+Customer
+   ↓
+Order
+   ↓
+Kitchen Queue
+   ↓
+Chef
+```
+
+The order waits in the queue until the chef processes it.
+
+### Technology examples
+
+Kafka
+
+RabbitMQ
+
+Amazon SQS
+
+### System example
+
+When a user uploads a video:
+
+```text
+User
+ ↓
+Video Server
+ ↓
+Message Queue
+ ↓
+Video Processing Service
+```
+
+The user does not need to wait while the video is processed.
+
+---
+
+# 8. Connection Pooling
+
+### Definition
+
+Connection pooling means maintaining a collection of reusable database connections.
+
+### Why do we use it?
+
+Creating a new database connection every time is expensive.
+
+Instead:
+
+```text
+Application
+ ↓
+Connection Pool
+ ↓
+Database
+```
+
+The application reuses existing connections.
+
+### Real life example
+
+Imagine a taxi company.
+
+Instead of buying a new taxi every time someone needs a ride, the company keeps a fleet of taxis and reuses them.
+
+### Without connection pooling
+
+```text
+Request
+ ↓
+Create connection
+ ↓
+Database
+ ↓
+Close connection
+```
+
+Repeated thousands of times.
+
+### With pooling
+
+```text
+Connection Pool
+ ↓ ↓ ↓ ↓
+Database
+```
+
+Connections are reused.
+
+---
+
+# 9. Security
+
+### Definition
+
+Security protects systems and data from unauthorized access and attacks.
+
+### Why do we use it?
+
+We need to protect:
+
+• User information
+• Passwords
+• Financial information
+• APIs
+• Databases
+• Infrastructure
+
+### Real life example
+
+Banking applications use:
+
+• Passwords
+• OTP
+• Encryption
+• Authentication
+• Authorization
+
+### Example
+
+Authentication asks:
+
+**Who are you?**
+
+Authorization asks:
+
+**What are you allowed to do?**
+
+---
+
+# 10. Protocols
+
+### Definition
+
+A protocol is a set of rules that defines how systems communicate.
+
+### Why do we use them?
+
+Different computers need common communication rules.
+
+### Examples
+
+HTTP
+
+HTTPS
+
+TCP
+
+UDP
+
+WebSocket
+
+DNS
+
+### Real life example
+
+Imagine two people speaking English.
+
+They understand each other because they follow a common language.
+
+Similarly:
+
+```text
+Client
+   ↕
+HTTP
+   ↕
+Server
+```
+
+Both understand the communication format.
+
+---
+
+# 11. Caching
+
+### Definition
+
+Caching stores frequently accessed data temporarily so it can be retrieved faster.
+
+### Why do we use it?
+
+It reduces:
+
+• Database load
+• Response time
+• Network traffic
+
+### Real life example
+
+Imagine you frequently use a book.
+
+Instead of going to the library every time, you keep the book on your desk.
+
+That is similar to caching.
+
+### System example
+
+Without cache:
+
+```text
+User
+ ↓
+Application
+ ↓
+Database
+```
+
+With cache:
+
+```text
+User
+ ↓
+Application
+ ↓
+Cache
+ ↓
+Database only when needed
+```
+
+### Popular technology
+
+Redis
+
+---
+
+# 12. Idempotency
+
+### Definition
+
+An operation is idempotent when performing it multiple times produces the same final result as performing it once.
+
+### Why do we use it?
+
+It prevents duplicate operations when a request is accidentally sent multiple times.
+
+### Real life example
+
+Suppose you click **Pay ₹500**.
+
+Network fails.
+
+Your application sends the payment request again.
+
+Without idempotency:
+
+```text
+₹500 + ₹500 = ₹1000 deducted
+```
+
+With idempotency:
+
+```text
+First request → Payment successful
+Second request → Already processed
+```
+
+### Common use
+
+Payment systems
+
+Order creation
+
+Booking systems
+
+Bank transactions
+
+---
+
+# 13. Single Point of Failure
+
+### Definition
+
+A single point of failure is one component whose failure can bring down the entire system.
+
+### Why do we avoid it?
+
+Because one failure should not destroy the entire application.
+
+### Bad architecture
+
+```text
+Users
+  ↓
+One Server
+  ↓
+Database
+```
+
+If the server crashes:
+
+```text
+Entire application DOWN
+```
+
+### Better architecture
+
+```text
+        Load Balancer
+        /           \
+   Server 1       Server 2
+```
+
+If Server 1 fails, Server 2 can continue serving users.
+
+---
+
+# 14. Monitoring and Logging
+
+## Monitoring
+
+Monitoring means continuously observing the health and performance of the system.
+
+## Logging
+
+Logging means recording events that happen inside the system.
+
+### Why do we use them?
+
+To identify:
+
+• Errors
+• Slow requests
+• Server failures
+• High CPU usage
+• Database problems
+• Security issues
+
+### Real life example
+
+Suppose an application suddenly becomes slow.
+
+Monitoring tells you:
+
+```text
+CPU: 95%
+Memory: 90%
+Response time: 8 seconds
+```
+
+Logs may tell you:
+
+```text
+Database connection timeout
+```
+
+Now engineers can investigate the problem.
+
+### Common tools
+
+Prometheus
+
+Grafana
+
+ELK
+
+OpenTelemetry
+
+---
+
+# 15. Storage
+
+### Definition
+
+Storage is used to store large amounts of data, especially files and objects.
+
+### Why do we use it?
+
+Applications need to store:
+
+• Images
+• Videos
+• PDFs
+• Documents
+• Backups
+
+### Real life example
+
+Google Drive stores:
+
+```text
+Photos
+Videos
+Documents
+PDFs
+```
+
+### Common technologies
+
+Amazon S3
+
+Google Cloud Storage
+
+Azure Blob Storage
+
+### Important distinction
+
+Database:
+
+```text
+User information
+Orders
+Payments
+```
+
+Object storage:
+
+```text
+Images
+Videos
+Files
+```
+
+---
+
+# 16. Search
+
+### Definition
+
+Search allows users to quickly find relevant information from a large dataset.
+
+### Why do we use it?
+
+Searching millions of records directly in a database can be slow.
+
+A dedicated search system can provide faster and more flexible searching.
+
+### Real life example
+
+Amazon search:
+
+```text
+"wireless headphones"
+```
+
+The system needs to find relevant products from millions of products.
+
+### Common technologies
+
+Elasticsearch
+
+OpenSearch
+
+Solr
+
+### Example
+
+```text
+User
+ ↓
+Search API
+ ↓
+Search Engine
+ ↓
+Relevant Results
+```
+
+---
+
+# 17. Distributed Transactions
+
+### Definition
+
+A distributed transaction involves an operation that spans multiple services or databases.
+
+### Why do we use it?
+
+Modern applications often divide functionality across multiple services.
+
+One business operation may therefore involve several systems.
+
+### Real life example
+
+Online shopping:
+
+```text
+Order Service
+     ↓
+Payment Service
+     ↓
+Inventory Service
+     ↓
+Delivery Service
+```
+
+Suppose payment succeeds but inventory fails.
+
+The system must handle this situation correctly.
+
+### Important concepts
+
+Two Phase Commit
+
+Saga Pattern
+
+Compensation
+
+---
+
+# 18. Scalability
+
+### Definition
+
+Scalability is the ability of a system to handle increasing workload by adding resources.
+
+### Why do we use it?
+
+Today your application may have:
+
+```text
+1,000 users
+```
+
+Tomorrow:
+
+```text
+1,000,000 users
+```
+
+The system should continue working.
+
+### Two major approaches
+
+### Vertical scaling
+
+Increase the power of one server.
+
+```text
+Small Server
+     ↓
+Powerful Server
+```
+
+### Horizontal scaling
+
+Add more servers.
+
+```text
+Server 1
+Server 2
+Server 3
+Server 4
+```
+
+Horizontal scaling is commonly used in large distributed systems.
+
+---
+
+# 19. Availability
+
+### Definition
+
+Availability means how often a system is operational and accessible.
+
+### Why do we use it?
+
+Users expect applications to work whenever they need them.
+
+### Real life example
+
+Banking systems should ideally be available continuously.
+
+If the banking application is unavailable:
+
+```text
+User cannot check balance
+User cannot transfer money
+User cannot make payments
+```
+
+### Example
+
+If a service promises very high availability, engineers may use:
+
+• Multiple servers
+• Replication
+• Failover
+• Load balancing
+
+---
+
+# 20. Reliability
+
+### Definition
+
+Reliability means the system consistently performs its expected function correctly.
+
+### Availability vs Reliability
+
+Availability:
+
+**Is the system working?**
+
+Reliability:
+
+**Does the system work correctly and consistently?**
+
+### Example
+
+A payment service may be available but incorrectly charge users.
+
+It is available but not reliable.
+
+---
+
+# 21. Consistency
+
+### Definition
+
+Consistency means users or services see data according to the consistency guarantees provided by the system.
+
+### Why do we use it?
+
+Distributed systems often have multiple copies of data.
+
+We need rules about when those copies should reflect updates.
+
+### Real life example
+
+Suppose your bank balance is:
+
+```text
+₹10,000
+```
+
+You withdraw:
+
+```text
+₹2,000
+```
+
+You should not see inconsistent balances across important banking operations.
+
+### Example
+
+```text
+Database A → ₹8,000
+Database B → ₹10,000
+```
+
+If the system promises strong consistency, this temporary disagreement must be prevented or controlled according to the system's consistency model.
+
+---
+
+# 22. Performance
+
+### Definition
+
+Performance describes how efficiently a system responds to requests.
+
+Important measurements include:
+
+• Response time
+• Throughput
+• CPU usage
+• Memory usage
+• Network latency
+
+### Why do we use it?
+
+Users expect applications to respond quickly.
+
+### Real life example
+
+Compare:
+
+```text
+Search → 100 milliseconds
+```
+
+with:
+
+```text
+Search → 10 seconds
+```
+
+The first system provides a much faster user experience.
+
+### Important terms
+
+**Latency**
+
+Time required to complete one operation.
+
+**Throughput**
+
+Number of operations processed in a given amount of time.
+
+---
+
+# 23. CAP Theorem
+
+CAP stands for:
+
+**Consistency**
+
+**Availability**
+
+**Partition Tolerance**
+
+### Definition
+
+CAP theorem describes a fundamental tradeoff in distributed systems when a network partition occurs.
+
+A distributed system cannot simultaneously guarantee all three properties in their strongest forms during a partition.
+
+### C: Consistency
+
+Every relevant read gets the appropriate latest value according to the system's consistency guarantee.
+
+### A: Availability
+
+Every request receives a response according to the system's availability guarantee.
+
+### P: Partition Tolerance
+
+The system continues operating despite communication failures between parts of the distributed system.
+
+### Real life example
+
+Suppose you have:
+
+```text
+Server A
+   ↕
+Network
+   ↕
+Server B
+```
+
+Now the network connection breaks.
+
+```text
+Server A    X    Server B
+```
+
+The system must make design choices about how it behaves while the partition exists.
+
+---
+
+# 24. Data Consistency
+
+### Definition
+
+Data consistency means maintaining correct and expected relationships between copies of data and operations.
+
+### Why do we use it?
+
+Distributed systems may have multiple databases or replicas.
+
+We need to ensure users do not receive incorrect or unexpected information.
+
+### Real life example
+
+Suppose an e commerce application has:
+
+```text
+Inventory = 1
+```
+
+Two customers try to purchase the last item simultaneously.
+
+The system must prevent incorrect inventory such as:
+
+```text
+Inventory = 1
+
+Customer A → Purchase
+Customer B → Purchase
+
+Result should not incorrectly become
+Inventory = -1
+```
+
+Concurrency control and appropriate consistency mechanisms help prevent such problems.
+
+---
+
+# 25. Cost Optimization
+
+### Definition
+
+Cost optimization means designing and operating a system while controlling infrastructure and operational expenses.
+
+### Why do we use it?
+
+Cloud infrastructure can become expensive as traffic increases.
+
+### Real life example
+
+Suppose your application has:
+
+```text
+100 users
+```
+
+but you deploy 100 large servers.
+
+You are unnecessarily spending money.
+
+A better design may use resources according to actual demand.
+
+### Techniques
+
+• Auto scaling
+• Caching
+• Efficient database queries
+• Storage lifecycle policies
+• Serverless computing
+• Right sizing infrastructure
+
+---
+
+# 26. Disaster Recovery
+
+### Definition
+
+Disaster recovery is the ability to restore a system after a major failure.
+
+### Why do we use it?
+
+Failures can happen because of:
+
+• Hardware failure
+• Cyber attacks
+• Data center failure
+• Human mistakes
+• Natural disasters
+• Software problems
+
+### Real life example
+
+Imagine a banking company's main data center becomes unavailable.
+
+A backup system in another geographical location can help restore services.
+
+### Typical architecture
+
+```text
+Primary Data Center
+        ↓
+Data Replication
+        ↓
+Backup Data Center
+```
+
+### Important terms
+
+**RPO**
+
+Recovery Point Objective
+
+How much data loss is acceptable.
+
+Example:
+
+RPO = 15 minutes
+
+The organization aims to limit data loss to about 15 minutes of data.
+
+**RTO**
+
+Recovery Time Objective
+
+How quickly the service should be restored.
+
+Example:
+
+RTO = 1 hour
+
+The organization aims to restore the service within about one hour.
+
+---
+
+# 27. How Everything Connects
+
+Now imagine you are designing a **YouTube like system**.
+
+A simplified architecture could look like this:
+
+```text
+                  Users
+                    ↓
+                   CDN
+                    ↓
+              Load Balancer
+                    ↓
+             Application API
+              ↙     ↓      ↘
+          Cache   Search   Database
+             ↓       ↓
+           Redis  Search Engine
+
+                    ↓
+              Message Queue
+                    ↓
+           Video Processing
+                    ↓
+               Storage
+```
+
+Now every concept has a purpose.
+
+| Concept                     | Purpose                                 |
+| --------------------------- | --------------------------------------- |
+| Functional Requirements     | Define what the application does        |
+| Non Functional Requirements | Define quality expectations             |
+| CDN                         | Deliver content faster                  |
+| Database                    | Store structured application data       |
+| Architecture                | Organize system components              |
+| API                         | Enable communication                    |
+| Messaging Queue             | Process tasks asynchronously            |
+| Connection Pooling          | Reuse database connections              |
+| Security                    | Protect users and systems               |
+| Protocols                   | Define communication rules              |
+| Caching                     | Reduce latency and database load        |
+| Idempotency                 | Prevent duplicate operations            |
+| Single Point of Failure     | Something we try to eliminate           |
+| Monitoring                  | Observe system health                   |
+| Logging                     | Record system events                    |
+| Storage                     | Store files and large objects           |
+| Search                      | Find information efficiently            |
+| Distributed Transactions    | Coordinate operations across services   |
+| Scalability                 | Handle increasing workload              |
+| Availability                | Keep the system accessible              |
+| Reliability                 | Keep the system working correctly       |
+| Consistency                 | Control how data remains synchronized   |
+| Performance                 | Improve speed and efficiency            |
+| CAP Theorem                 | Understand distributed system tradeoffs |
+| Data Consistency            | Maintain correct data behavior          |
+| Cost Optimization           | Control infrastructure expenses         |
+| Disaster Recovery           | Recover after major failures            |
+
+# 28. The Most Important Mental Model
+
+When you get a **System Design interview question**, think in this order:
+
+```text
+1. Requirements
+       ↓
+2. Functional Requirements
+       ↓
+3. Non Functional Requirements
+       ↓
+4. Estimate Scale
+       ↓
+5. API Design
+       ↓
+6. High Level Architecture
+       ↓
+7. Database
+       ↓
+8. Cache
+       ↓
+9. Load Balancing
+       ↓
+10. CDN
+       ↓
+11. Messaging Queue
+       ↓
+12. Scalability
+       ↓
+13. Availability
+       ↓
+14. Consistency
+       ↓
+15. Security
+       ↓
+16. Monitoring
+       ↓
+17. Disaster Recovery
+       ↓
+18. Cost Optimization
+```
+
+### One simple example
+
+If the interviewer says:
+
+**Design Instagram**
+
+You should start thinking:
+
+```text
+What can users do?
+        ↓
+Upload photos
+View feed
+Like posts
+Comment
+Follow users
+        ↓
+How many users?
+        ↓
+Database
+        ↓
+Object Storage
+        ↓
+CDN
+        ↓
+Cache
+        ↓
+API
+        ↓
+Load Balancer
+        ↓
+Message Queue
+        ↓
+Search
+        ↓
+Scalability
+        ↓
+Availability
+        ↓
+Consistency
+        ↓
+Security
+        ↓
+Monitoring
+```
+
+This is the fundamental way to approach **System Design**. The goal is not to memorize technologies. The goal is to understand **what problem each component solves and when you actually need it**.
